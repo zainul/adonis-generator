@@ -1,0 +1,43 @@
+{% extends 'master' %}
+
+{% block content %}
+  <div>
+    <br/>
+    <a href="/<%= route %>/create" class="btn btn-success">
+      New <%= name %>
+    </a>
+    <br/><br/>
+    <table class="table table-striped data-table">
+      <thead>
+        <tr>
+          <% for(var key in fields) {%>
+            <td><b><%= key %></b></td>
+          <% } %>
+          <td><b>Action</b></td>
+        </tr>
+      </thead>
+      {% for <%= objectDb %> in <%= route %> %}
+      <tr>
+      <% for(var key in fields) {%>
+        <td>{{ <%= objectDb %>.<%= key %> }}</td>
+      <% } %>
+      <td>
+        {{ form.open({action: '<%= controllerName %>.destroy', method: 'DELETE',
+         params: { id: <%= objectDb %>.id } }) }}
+        <div class='btn-group'>
+          {{ csrfField }}
+          <a href="/<%= route %>/{{ <%= objectDb %>.id }}" class="btn btn-info">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+          </a>
+          <a href="/<%= route %>/{{ <%= objectDb %>.id }}/edit" class="btn btn-warning">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          </a>
+          {{ form.button('X', 'delete', { class: 'btn btn-danger' }) }}
+        <div>
+        {{ form.close() }}
+      </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}

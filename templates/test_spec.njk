@@ -1,0 +1,33 @@
+'use strict'
+
+const chai = use('chai')
+const assert = chai.assert
+const {{shortName}} = use('App/Model/{{shortName}}');
+const {{shortName}}Repository = make('App/Repositories/{{shortName}}');
+const Lucid = use('Lucid')
+use('co-mocha')
+
+describe('Unit Test {{shortName}} Repository', function () {
+
+  afterEach(function * () {
+    const Db = use('Database')
+    yield Db.truncate('{{tableName}}')
+  })
+
+  it('should save {{lowerName}} to the database when all required fields have been passed', function * () {
+
+    {% for name, item in fields %}const {{ name }} = 'RealtimeProject';
+    {% endfor %}
+
+    yield {{shortName}}Repository.create({
+      {% for name, item in fields %}{{ name }}: 'RealtimeProject',
+      {% endfor %}
+    })
+
+    const {{lowerName}} = yield {{shortName}}.findBy('{{ firstField }}', {{ firstField }});
+
+    {% for name, item in fields %}assert.equal({{lowerName}}.{{ name }}, {{ name }});
+    {% endfor %}
+  })
+
+})

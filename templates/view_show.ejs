@@ -1,0 +1,13 @@
+{% extends 'master' %}
+
+{% block content %}
+  <div>
+    <h3>Show Task</h3>
+
+    <% for(var key in fields) {%>
+      <fieldset class="form-group">
+        <b><%= key %></b> : {{ <%= objectDb %>.<%= key %> }}
+      </fieldset>
+    <% } %>
+  </div>
+{% endblock %}

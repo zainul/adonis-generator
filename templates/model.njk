@@ -1,0 +1,24 @@
+'use strict'
+
+const Lucid = use('Lucid')
+
+class {{name}} extends Lucid {
+
+  static get table () {
+    return '{{table}}'
+  }
+
+  static get rules () {
+    return {
+      {% for key, value in fields %}{{ key }} : '{{ value.rules }}' {% if loop.last %} {% else %},{% endif %}
+      {% endfor %}
+    }
+  }
+
+  {% for item in relations %}{{item.name}}() {
+    return this.{{item.relationtype}}('{{item.usenamespace}}/{{item.relatedmodel}}');
+  }
+  {% endfor %}
+}
+
+module.exports = {{name}}

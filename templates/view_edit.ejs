@@ -1,0 +1,16 @@
+{% extends 'master' %}
+
+{% block content %}
+  <div>
+    <h3>Edit <%= name %></h3>
+    {{ form.open({action: '<%= controllerName %>.update', params: {id: <%= objectDb %>.id}, files:false  }) }}
+
+    {{ csrfField }}
+
+    {% include "./field.njk" %}
+
+    {{ form.submit('Update', 'update', { class: 'btn btn-success' }) }}
+
+  {{ form.close() }}
+  </div>
+{% endblock %}

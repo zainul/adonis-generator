@@ -1,0 +1,22 @@
+'use strict'
+
+const Schema = use('Schema')
+
+class {{name}}Schema extends Schema {
+
+  up () {
+    this.create('{{table}}', (table) => {
+      table.increments()
+      {% for key , value in fields %} {% if value.type.split("|")[1] %} table.{{ value.type.split("|")[0] }}('{{ key }}', {{value.type.split("|")[1]}}) {% else %} table.{{ value.type }}('{{ key }}') {% endif %}
+      {% endfor %}
+      table.timestamps()
+    })
+  }
+
+  down () {
+    this.drop('{{table}}')
+  }
+
+}
+
+module.exports = {{name}}Schema

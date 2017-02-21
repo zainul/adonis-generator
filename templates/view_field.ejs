@@ -1,0 +1,6 @@
+<% for(var key in fields) {%>
+  <fieldset class="form-group">
+    {{ form.label('<%= key %>') }}
+    {{ form.input('text', '<%= key %>', <%= objectDb %>.<%= key %>, { class: 'form-control' }) }}
+  </fieldset>
+<% } %>

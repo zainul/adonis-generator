@@ -1,0 +1,69 @@
+'use strict'
+
+const Exceptions = use('App/Exceptions');
+
+class {{name}}Repository {
+
+  static get inject() {
+    return ['App/Model/{{name}}'];
+  }
+
+  constructor ({{name}}) {
+    this.{{name}} = {{name}};
+  }
+
+  * find (id) {
+    const {{lowerName}} = yield this.{{name}}.find(id);
+
+    if (!{{lowerName}}) {
+      throw new Exceptions.ApplicationExceptions('Cannot find {{lowerName}} with given id', 404)
+    }
+
+    return {{lowerName}}
+  }
+
+  * all () {
+    const {{table}} = yield this.{{name}}.all();
+
+    return {{table}}
+  }
+
+  * create (options) {
+    const {{lowerName}} = new this.{{name}}(options);
+
+    yield {{lowerName}}.save()
+
+    if ({{lowerName}}.isNew()) {
+      throw new Exceptions.ApplicationException('Unable to save {{lowerName}}', 500)
+    }
+
+    return {{lowerName}}
+  }
+
+  * update (id, options) {
+    const {{lowerName}} =  yield this.{{name}}.find(id);
+
+    for (var key in options) {
+      {{lowerName}}[key] = options[key];
+    }
+
+    yield {{lowerName}}.save();
+
+    return {{lowerName}}
+  }
+
+  * delete (id) {
+
+    const {{lowerName}} = yield this.{{name}}.find(id);
+
+    yield {{lowerName}}.delete();
+
+    if (!{{lowerName}}.isDeleted()) {
+      throw new Exceptions.ApplicationException('Unable to delete {{lowerName}}', 500)
+    }
+
+    return true
+  }
+}
+
+module.exports = {{name}}Repository

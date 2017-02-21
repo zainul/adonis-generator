@@ -1,0 +1,16 @@
+{% extends 'master' %}
+
+{% block content %}
+  <div>
+    <h3>Create <%= name %></h3>
+    {{ form.open({action: '<%= controllerName %>.store', files:false }) }}
+
+      {{ csrfField }}
+
+      {% include "./field.njk" %}
+
+      {{ form.submit('Save', 'save', { class: 'btn btn-success' }) }}
+
+    {{ form.close() }}
+  </div>
+{% endblock %}

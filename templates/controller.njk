@@ -1,0 +1,84 @@
+'use strict'
+const Validator = use('Validator');
+const {{shortName}} = use('App/Model/{{shortName}}');
+const {{shortName}}Repository = make('App/Repositories/{{shortName}}');
+const BaseController = require('./BaseController');
+
+class {{name}} extends BaseController {
+
+  constructor() {
+    super();
+  }
+
+  * index(request, response) {
+    const {{table}} = yield {{shortName}}.query().fetch();
+
+    yield response.sendView('{{table}}.index', { {{table}} : {{table}}.toJSON() })
+  }
+
+  * create(request, response) {
+    yield response.sendView('{{table}}.create', {} )
+  }
+
+  * store(request, response) {
+    const postData = request.only('{{ fields | safe }}');
+    const validation = yield Validator.validate(postData, {{shortName}}.rules)
+
+    if (validation.fails()) {
+      yield request
+       .withOnly('{{ fields | safe }}')
+       .andWith({ errors: validation.messages() })
+       .flash();
+
+      response.redirect('back')
+      return
+    }
+
+    const created = yield {{shortName}}.create(postData);
+
+    response.redirect('back');
+  }
+
+  * show(request, response) {
+    const {{shortNameLower}} = yield {{shortName}}Repository.find(request.param('id'))
+
+    yield response.sendView('{{table}}.show',
+      {
+        {{shortNameLower}}: {{shortNameLower}}.toJSON()
+      });
+  }
+
+  * edit(request, response) {
+    const {{shortNameLower}} = yield {{shortName}}Repository.find(request.param('id'))
+
+    yield response.sendView('{{table}}.edit', { {{shortNameLower}}: {{shortNameLower}}.toJSON() })
+  }
+
+  * update(request, response) {
+    const updatedData = request.only('{{ fields | safe  }}');
+
+    const validation = yield Validator.validate(updatedData, {{shortName}}.rules)
+
+    if (validation.fails()) {
+      yield request
+       .withOnly('{{ fields | safe }}')
+       .andWith({ errors: validation.messages() })
+       .flash();
+
+      response.redirect('back')
+      return
+    }
+
+    const {{shortNameLower}} = yield {{shortName}}Repository.update(request.param('id'), updatedData)
+
+    yield response.redirect('/{{table}}')
+  }
+
+  * destroy(request, response) {
+    yield {{shortName}}Repository.delete(request.param('id'));
+
+    yield response.redirect('/{{table}}');
+  }
+}
+
+module.exports = {{name}}
