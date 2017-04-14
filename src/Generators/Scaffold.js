@@ -59,22 +59,26 @@ class Scaffold extends BaseGenerator {
   }
 
   parseRelation(relations) {
-    for (var i = 0; i < relations.length; i++) {
-      if (relations[i].name == "") {
-        const relatedModel = relations[i].relatedmodel;
-        if (relations[i].relationtype == "belongsTo") {
-          const method = this._makeEntityName(relatedModel, '', false, 'singular');
-          relations[i].name = inflect.camelize(method.entityName);
-        }else {
-          const method = this._makeEntityName(relatedModel, '', false, 'plural');
-          relations[i].name = inflect.camelize(method.entityName);
+    if (relations) {
+      for (var i = 0; i < relations.length; i++) {
+        if (relations[i].name == "") {
+          const relatedModel = relations[i].relatedmodel;
+          if (relations[i].relationtype == "belongsTo") {
+            const method = this._makeEntityName(relatedModel, '', false, 'singular');
+            relations[i].name = inflect.camelize(method.entityName);
+          }else {
+            const method = this._makeEntityName(relatedModel, '', false, 'plural');
+            relations[i].name = inflect.camelize(method.entityName);
+          }
+          relations[i].relatedmodel = inflect.camelize(relatedModel);
         }
-        relations[i].relatedmodel = inflect.camelize(relatedModel);
-      }
 
-      if (relations[i].usenamespace == "") {
-        relations[i].usenamespace = 'App/Model';
+        if (relations[i].usenamespace == "") {
+          relations[i].usenamespace = 'App/Model';
+        }
       }
+    }else {
+      relations = [];
     }
 
     return relations;

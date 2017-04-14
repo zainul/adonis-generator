@@ -6,7 +6,7 @@ This repo is use to build scaffold from schema.yml , including controller, model
 
 It includes generators for:
 
-- Scaffold 
+- Scaffold
 
 The scaffold will be generated
 
@@ -32,7 +32,7 @@ npm i adonis-generator
 
 after installing , you can create file name schema.yml to define schema. After it, you please added aceProvider in
 
-open 
+open
 
 ```
 bootstrap/app.js
@@ -40,7 +40,7 @@ bootstrap/app.js
 add in aceProviders
 ```
 ---
-'adonis-generators/providers/GeneratorsProvider',
+'adonis-generator/providers/GeneratorsProvider',
 ---
 ```
 
@@ -116,7 +116,7 @@ fields:
   name_binary_field:
     type: binary
 relation:
-  - name: 
+  - name:
     relationtype: belongsTo,
     relatedmodel: country,
     relatedcolumn: id,
@@ -124,6 +124,13 @@ relation:
     extramethods:
 
 ```
+
+###  if no relation don't add property relation in your schema or just write
+```
+relation:
+  []
+```
+
 
 ###  The output will be build
 
@@ -139,21 +146,21 @@ class BoxSchema extends Schema {
   up () {
     this.create('boxes', (table) => {
       table.increments()
-        table.integer('integer_field') 
-        table.string('string_field', 500) 
-        table.text('text_field') 
-        table.float('float_field', 5,2) 
-        table.decimal('decimal_field', 5,2) 
-        table.boolean('boolean_field') 
-        table.date('date_field') 
-        table.datetime('datetime_field') 
-        table.time('time_field') 
-        table.timestamp('timestamp_field') 
-        table.json('json_field') 
-        table.jsonb('jsonb_field') 
-        table.enu('enu_field') 
-        table.binary('binary_field') 
-      
+        table.integer('integer_field')
+        table.string('string_field', 500)
+        table.text('text_field')
+        table.float('float_field', 5,2)
+        table.decimal('decimal_field', 5,2)
+        table.boolean('boolean_field')
+        table.date('date_field')
+        table.datetime('datetime_field')
+        table.time('time_field')
+        table.timestamp('timestamp_field')
+        table.json('json_field')
+        table.jsonb('jsonb_field')
+        table.enu('enu_field')
+        table.binary('binary_field')
+
       table.timestamps()
     })
   }
@@ -198,11 +205,11 @@ class Box extends Lucid {
       jsonb_field : '' ,
       enu_field : 'array' ,
       binary_field : ''  
-      
+
     }
   }
 
-  
+
 }
 
 module.exports = Box
@@ -211,7 +218,7 @@ module.exports = Box
 
 #### Repository
 
-will be generated repository 
+will be generated repository
 
 ```
 'use strict'
@@ -509,69 +516,69 @@ index
     <table class="table table-striped data-table">
       <thead>
         <tr>
-          
+
             <td><b>integer_field</b></td>
-          
+
             <td><b>string_field</b></td>
-          
+
             <td><b>text_field</b></td>
-          
+
             <td><b>float_field</b></td>
-          
+
             <td><b>decimal_field</b></td>
-          
+
             <td><b>boolean_field</b></td>
-          
+
             <td><b>date_field</b></td>
-          
+
             <td><b>datetime_field</b></td>
-          
+
             <td><b>time_field</b></td>
-          
+
             <td><b>timestamp_field</b></td>
-          
+
             <td><b>json_field</b></td>
-          
+
             <td><b>jsonb_field</b></td>
-          
+
             <td><b>enu_field</b></td>
-          
+
             <td><b>binary_field</b></td>
-          
+
           <td><b>Action</b></td>
         </tr>
       </thead>
       {% for box in boxes %}
       <tr>
-      
+
         <td>{{ box.integer_field }}</td>
-      
+
         <td>{{ box.string_field }}</td>
-      
+
         <td>{{ box.text_field }}</td>
-      
+
         <td>{{ box.float_field }}</td>
-      
+
         <td>{{ box.decimal_field }}</td>
-      
+
         <td>{{ box.boolean_field }}</td>
-      
+
         <td>{{ box.date_field }}</td>
-      
+
         <td>{{ box.datetime_field }}</td>
-      
+
         <td>{{ box.time_field }}</td>
-      
+
         <td>{{ box.timestamp_field }}</td>
-      
+
         <td>{{ box.json_field }}</td>
-      
+
         <td>{{ box.jsonb_field }}</td>
-      
+
         <td>{{ box.enu_field }}</td>
-      
+
         <td>{{ box.binary_field }}</td>
-      
+
       <td>
         {{ form.open({action: 'BoxController.destroy', method: 'DELETE',
          params: { id: box.id } }) }}
@@ -604,63 +611,63 @@ show
   <div>
     <h3>Show Task</h3>
 
-    
+
       <fieldset class="form-group">
         <b>integer_field</b> : {{ box.integer_field }}
       </fieldset>
-    
+
       <fieldset class="form-group">
         <b>string_field</b> : {{ box.string_field }}
       </fieldset>
-    
+
       <fieldset class="form-group">
         <b>text_field</b> : {{ box.text_field }}
       </fieldset>
-    
+
       <fieldset class="form-group">
         <b>float_field</b> : {{ box.float_field }}
       </fieldset>
-    
+
       <fieldset class="form-group">
         <b>decimal_field</b> : {{ box.decimal_field }}
       </fieldset>
-    
+
       <fieldset class="form-group">
         <b>boolean_field</b> : {{ box.boolean_field }}
       </fieldset>
-    
+
       <fieldset class="form-group">
         <b>date_field</b> : {{ box.date_field }}
       </fieldset>
-    
+
       <fieldset class="form-group">
         <b>datetime_field</b> : {{ box.datetime_field }}
       </fieldset>
-    
+
       <fieldset class="form-group">
         <b>time_field</b> : {{ box.time_field }}
       </fieldset>
-    
+
       <fieldset class="form-group">
         <b>timestamp_field</b> : {{ box.timestamp_field }}
       </fieldset>
-    
+
       <fieldset class="form-group">
         <b>json_field</b> : {{ box.json_field }}
       </fieldset>
-    
+
       <fieldset class="form-group">
         <b>jsonb_field</b> : {{ box.jsonb_field }}
       </fieldset>
-    
+
       <fieldset class="form-group">
         <b>enu_field</b> : {{ box.enu_field }}
       </fieldset>
-    
+
       <fieldset class="form-group">
         <b>binary_field</b> : {{ box.binary_field }}
       </fieldset>
-    
+
   </div>
 {% endblock %}
 

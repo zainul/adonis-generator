@@ -1,8 +1,12 @@
 {
-  "name": "adonis-generators",
-  "version": "0.0.1",
+  "name": "adonis-generator",
+  "version": "0.3.2",
   "description": "adonis scaffold with field",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zainul/adonis-generator.git"
+  },
   "dependencies": {
     "ejs": "^2.5.6",
     "nunjucks": "^3.0.0",
