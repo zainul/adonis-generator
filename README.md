@@ -1,4 +1,5 @@
 [![Travis](https://img.shields.io/travis/rust-lang/rust.svg)](https://api.travis-ci.org/zainul-ma/adonis-generator.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/zainul-ma/adonis-generator/badge.svg?branch=master)](https://coveralls.io/github/zainul-ma/adonis-generator?branch=master)
 
 # adonis-generator
 
