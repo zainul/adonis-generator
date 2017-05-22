@@ -27,14 +27,14 @@
     "cz-conventional-changelog": "^1.2.0",
     "istanbul": "^0.4.5",
     "jshint": "^2.9.4",
-    "mocha": "^3.2.0",
+    "mocha": "^3.4.1",
     "standard": "^8.6.0"
   },
   "scripts": {
-    "lint": "standard src/**/*.js test/**/*js",
-    "test": "npm run lint && npm run test:unit && npm run test:integration",
-    "test:integration": "_mocha test/integration",
-    "test:unit": "_mocha test/unit"
+    "lint": "standard src/**/*.js",
+    "test": "npm run lint",
+    "test:integration": "mocha -- test/integration/*.js",
+    "test:unit": "mocha -- test/unit/*.js"
   },
   "author": "Zainul Mas'adi <zainulmasadi90@gmail.com> (zainulmasadi.com)",
   "license": "ISC"
