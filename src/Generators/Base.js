@@ -7,13 +7,12 @@ const i = require('inflect')
 const Ioc = require('adonis-fold').Ioc
 const Command = Ioc.use('Adonis/Src/Command')
 const fs = require('co-fs-extra')
-const env = new nunjucks.Environment();
-env.addFilter('split', function(str, seperator) {
-    return str.split(seperator);
-});
+const env = new nunjucks.Environment()
+env.addFilter('split', function (str, seperator) {
+  return str.split(seperator)
+})
 
 class Base extends Command {
-
   constructor (Helpers) {
     super()
     this.helpers = Helpers
@@ -98,7 +97,6 @@ class Base extends Command {
    */
 
   * write (template, dest, options, renderingTemplate) {
-
     template = template.endsWith(renderingTemplate) ? template : this._makeTemplatePath(template, renderingTemplate)
     const contents = yield this._getContents(template)
 
@@ -107,11 +105,10 @@ class Base extends Command {
       throw new Error(`I am afraid ${this._incrementalPath(dest)} already exists`)
     }
 
-    if (renderingTemplate == '.njk') {
-      const temp = nunjucks.compile(contents, env);
+    if (renderingTemplate === '.njk') {
+      const temp = nunjucks.compile(contents, env)
       return yield this._writeContents(dest, temp.render(options))
-    }
-    else {
+    } else {
       const temp = ejs.compile(contents)
       return yield this._writeContents(dest, temp(options))
     }
@@ -172,7 +169,6 @@ class Base extends Command {
       this._error(e.message)
     }
   }
-
 }
 
 module.exports = Base

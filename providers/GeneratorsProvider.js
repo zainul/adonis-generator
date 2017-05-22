@@ -3,13 +3,12 @@
 const ServiceProvider = require('adonis-fold').ServiceProvider
 
 class ScaffoldProvider extends ServiceProvider {
-
   constructor () {
     super()
     this.generators = ['Scaffold']
   }
 
-  * register() {
+  * register () {
     this.generators.forEach((generator) => {
       this.app.bind(`Adonis/Generators/Make:${generator}`, (app) => {
         const Helpers = app.use('Adonis/Src/Helpers')
@@ -18,7 +17,6 @@ class ScaffoldProvider extends ServiceProvider {
       })
     })
   }
-
 }
 
-module.exports =  ScaffoldProvider
+module.exports = ScaffoldProvider
