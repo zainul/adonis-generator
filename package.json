@@ -33,11 +33,12 @@
     "standard": "^8.6.0"
   },
   "scripts": {
-    "lint": "standard src/**/*.js -R",
+    "lint": "standard src/**/*.js",
     "test": "npm run lint",
     "test:integration": "mocha -- test/integration/*.js",
-    "test:unit": "mocha -- test/unit/*.js -R",
-    "coveralls": "node_modules/.bin/coveralls"
+    "test:unit": "mocha -- test/unit/*.js",
+    "cover": "istanbul cover node_modules/mocha/bin/mocha",
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },
   "author": "Zainul Mas'adi <zainulmasadi90@gmail.com> (zainulmasadi.com)",
   "license": "ISC"

@@ -8,3 +8,5 @@ notifications:
     rooms:
       - tnindo:UQ4e43faD5fHRZOuDEoWoF88#travis-ci
 after_success: 'npm run coveralls'
+script:
+   - bash sample.sh
